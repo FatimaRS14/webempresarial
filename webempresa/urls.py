@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings 
 
 
 urlpatterns = [
@@ -23,6 +24,14 @@ urlpatterns = [
     #Para importar la urls de una app propia no se debe poner nada solo las ""  sola para que el sistema funcione normal sin enrutamientos de más
 
     path('', include('core.urls')),
+    #path de services
+     path('services/', include('services.urls')),
     #path del admin 
     path('admin/', admin.site.urls),
 ]
+
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
