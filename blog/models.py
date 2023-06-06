@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
-
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 
 
@@ -20,7 +20,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name="Título")
-    content = models.TextField(verbose_name="Contenido")
+    content = RichTextField(verbose_name="Contenido")
     published = models.DateTimeField(verbose_name="Fecha de edición", default=now)
     image = models.ImageField(verbose_name="Imagen", upload_to="blog", null=True, blank=True)
     author = models.ForeignKey(User, verbose_name="Autor", on_delete=models.CASCADE)
